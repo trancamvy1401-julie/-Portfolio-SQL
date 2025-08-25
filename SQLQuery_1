@@ -1,0 +1,59 @@
+--Database Superstore_Regional_Sales
+
+--01 Xem bảng Customers
+select *
+from Customer
+
+--02 Bỏ 3 ký tự 'US-' trong cột PostalCode
+select *, replace (PostalCode, 'US-', '') as PostalCode_New
+from Customer
+
+--03 Bỏ 3 ký tự 'US-' trong cột PostalCode -> và dổi samg kiểu số
+select *, CAST (replace (PostalCode, 'US-', '') AS INT) as PostalCode_New 
+from Customer  
+
+--04 Tách cột CustomerName thành 2 cột First Name, Last Name
+select CustomerID, CustomerName, CHARINDEX(' ', CustomerName) AS Vitri, 
+    left(CustomerName, CHARINDEX(' ', CustomerName + '  ') - 1) AS FirstName
+from Customer  
+
+--05 Xem bảng Orders
+select *, ISNULL(Discount, 0) AS DiscountNew
+from Orders
+
+--06 Phân loại Discount
+select *, ISNULL(Discount, 0) AS DiscountNew,
+CASE
+WHEN ISNULL(Discount,0) < 0.2 THEN 'Low'
+WHEN ISNULL(Discount,0) < 0.4 THEN 'Medium'
+ELSE 'High'
+END   AS Note
+from Orders
+
+--07 Cho biết bảng Product có những Category nào
+select DISTINCT Category    --DISTINCT dùng duplicate
+from Product
+
+--08 Cho biết bảng Product có những Category, Subcategory nào
+select DISTINCT Category, SubCategory    --DISTINCT dùng duplicate
+from Product
+
+--09 Cho biết số sản phẩm của từng Category
+select Category, COUNT(*)  AS Sosanpham
+from Product
+group by Category
+
+--10 Cho biết Category nào có nhiều sản phẩm nhất
+select Category, COUNT(*)  AS Sosanpham
+from Product
+group by Category
+order by COUNT(*) desc
+
+--11 Liệt kê các Category có trên 400 sản phẩm
+select Category, COUNT(*)  AS Sosanpham
+from Product
+group by Category
+having count(*) > 400                 --Điều kiện trên giá trị thống kê
+
+
+
