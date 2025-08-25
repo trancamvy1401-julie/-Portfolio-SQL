@@ -1,0 +1,55 @@
+--Database Superstore_Regional_Sales
+
+--1 Cho biết đầy đủ thông tin của các Product
+SELECT *
+FROM Product
+
+--2 Nhóm hàng Technology có bao nhiêu Product
+SELECT *
+FROM Product
+where Category = 'Technology'
+
+--3 Cho biết CustomerName, Segment, State và Region của các khách hàng?
+SELECT CustomerName, Segment, State, Region 
+FROM Customer
+
+--4 Khách hàng đến từ khu vực nào nhiều nhất? => where từng region
+SELECT *
+FROM Customer
+where Region = 'Central'
+
+SELECT *
+FROM Customer
+WHERE region = 'south'
+
+--5 Có bao nhiêu khách hàng thuộc bộ phận “Corporate”?
+select *
+from Customer
+where segment = 'Corporate'
+
+--6 Cho biết OrderDate, CustomerID, ProductID, Sales, Profit của các đơn hàng?
+SELECT OrderDate, CustomerID, ProductID, Sales, Profit
+FROM Orders
+
+--7 Đơn hàng được đặt gần đây nhất là ngày nào? 
+select *
+from Orders
+order by OrderDate desc
+
+--8 Cho biết OrderNumber, OrderDate, ProductID, Sales, Profit của đơn hàng có Profit thấp nhất trong năm 2018?
+select OrderNumber, OrderDate, ProductID, Sales, Profit
+from orders
+order by profit asc
+
+--9 Cho biết OrderNumber, OrderDate, ProductID, Sales, Profit của đơn hàng có Profit cao nhất trong năm 2018? 
+select OrderNumber, OrderDate, ProductID, Sales, Profit
+from orders
+order by profit desc
+
+--10 Danh sách các đơn hàng OrderNumber, OrderDate, ProductID, Sales, Profit có Profit < 0 trong năm 2018 và Discount > 0? 
+select OrderNumber, OrderDate, ProductID, Sales, Profit
+from orders
+where profit < '0' and discount > '0'
+and year(OrderDate) = 2018
+
+
